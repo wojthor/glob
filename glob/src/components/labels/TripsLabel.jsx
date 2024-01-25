@@ -1,17 +1,17 @@
-import React from "react";
 import { useQuery } from "react-query";
+import Spinner from "../Spinner";
 import Figure from "react-bootstrap/Figure";
 import { Link } from "react-router-dom";
-import Spinner from "./Spinner";
-import Navigation from "./Navigation";
+import Navigation from "../Navigation";
 
 const reqUrl =
   "http://localhost/wordpress/wp-json/wp/v2/trips?acf_format=standard&_fields=id,title,acf";
 
-function Content() {
+function TripsLabel() {
   const { isLoading, error, data } = useQuery("trips", async () => {
     const req = await fetch(reqUrl);
-    return req.json();
+    const data = await req.json();
+    return data.filter((trip) => trip.acf.kategorie.name === "Wycieczka");
   });
 
   if (isLoading)
@@ -29,7 +29,7 @@ function Content() {
         <Navigation />
       </div>
 
-      <div className="d-flex flex-row flex-wrap  justify-content-center  gap-2">
+      <div className="d-flex flex-row flex-wrap    gap-2">
         {data.map((trip) => (
           <div key={trip.id} className="">
             <Figure className="">
@@ -51,4 +51,4 @@ function Content() {
   );
 }
 
-export default Content;
+export default TripsLabel;

@@ -8,7 +8,6 @@ const TripDetails = () => {
   const { tripId } = useParams();
 
   useEffect(() => {
-    // Asynchroniczna funkcja do pobrania szczegółów konkretnej wycieczki
     const fetchTripDetails = async () => {
       try {
         const res = await fetch(
@@ -18,7 +17,7 @@ const TripDetails = () => {
           throw new Error("Response not OK");
         }
         const data = await res.json();
-        // Zakładamy, że otrzymane dane są pełnym obiektem wycieczki
+
         setTrip(data);
       } catch (err) {
         console.error("There was an error fetching trip details:", err);
@@ -26,7 +25,7 @@ const TripDetails = () => {
     };
 
     fetchTripDetails();
-  }, [tripId]); // Wywołanie funkcji po zmianie wartości `tripId`
+  }, [tripId]);
 
   if (!trip) {
     return (

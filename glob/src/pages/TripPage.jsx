@@ -1,6 +1,6 @@
 import React from "react";
-import TripDetails from "./TripDetails";
-import Navbar from "./Navbar";
+import TripDetails from "../components/TripDetails";
+import Navbar from "../components/Navbar";
 
 function TripPage() {
   return (
